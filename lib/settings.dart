@@ -70,7 +70,7 @@ class _OptionsState extends State<Options> {
         ),
         SettingsSection(
           title: 'User',
-          tiles: [
+          tiles: RequestHandler.uid == 'exampleID' ? [
               SettingsTile(title: 'UID', trailing: FlatButton(
                 padding: EdgeInsets.all(0),
                 child: Text('Copy', style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),),
@@ -100,7 +100,7 @@ class _OptionsState extends State<Options> {
                   } 
                 ),
               )),
-          ],
+          ] : [SettingsTile(title: 'User settings disabled, when auth disabled on server')],
         ),
         SettingsSection(
           title: 'Theme',

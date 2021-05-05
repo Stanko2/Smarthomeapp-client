@@ -356,7 +356,10 @@ class _CustomControlsState extends State<CustomControls> {
       Row w = Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(control['label'], style: textStyle,),
+          Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: Text(control['label'], style: textStyle,),
+          ),
         ],
       );
       if(!widget.status.props.containsKey(control['property'])){
@@ -407,10 +410,12 @@ class _CustomControlsState extends State<CustomControls> {
     //   max: data['max'].toDouble(),
     // );
     var width = MediaQuery.of(context).size.width;
+    var columns = (MediaQuery.of(context).size.width * MediaQuery.of(context).devicePixelRatio / 500).ceil();
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
+          constraints: BoxConstraints(maxWidth: kIsWeb ? width * .75 / columns : width * .75),
           child: Slider(
             max: 100,
             min: 0,
@@ -427,7 +432,6 @@ class _CustomControlsState extends State<CustomControls> {
               });
             }
           ),
-          width: kIsWeb ? width * .25 : width * .75,
         ),
         // Container(
         //   width: width * (13/100),

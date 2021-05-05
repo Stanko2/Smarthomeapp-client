@@ -115,11 +115,15 @@ class RequestHandler{
       }, body: jsonEncode({'uid': uid}));
       print(response.body);
       var body = json.decode(response.body);
+      
       if(body['status'] == 'ERR'){
         if(body['message'] == 'user does not exist'){
           uid = null;
           await login(context, register: true);
         }
+      }
+      else{
+        uid = body['user']['uid'];
       }
       return;
     }
@@ -133,7 +137,7 @@ class RequestHandler{
       }, body: jsonEncode({'name': name}));
       var body = json.decode(res.body);
       if(body['status']=='ERR'){
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('gjaio')));
+        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('gjaio')));
         await login(context, register: true);
       }     
       settings.setString('UserId', body['user']['uid']);
